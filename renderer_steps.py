@@ -44,19 +44,38 @@ def choose_output_filename():
 def setup_rendering(scene):
     # Функция для настройки параметров рендеринга
 
-    # Установка типа вычислительного устройства (CUDA или METAL)
-    bpy.context.preferences.addons['cycles'].preferences.compute_device_type = 'METAL'
+    def select_render_engine():
+        while True:
+            print("\nВыберите тип движка рендеринга:")
+            print("1. Cycles")
+            print("2. Eevee")
+            choice = input("Введите номер выбранного варианта (1 или 2): ").strip()
 
-    # Включение всех доступных устройств GPU
-    for device in bpy.context.preferences.addons['cycles'].preferences.devices:
-        device.use = True
+            if choice == '1':
+                scene.render.engine = 'CYCLES'
+                break
+            elif choice == '2':
+                scene.render.engine = 'BLENDER_EEVEE'
+                break
+            else:
+                print("Некорректный ввод. Пожалуйста, введите 1 или 2.")
 
-    # Установка движка рендеринга и параметров
-    scene.render.engine = 'CYCLES'
-    scene.cycles.device = 'GPU'
-    scene.cycles.samples = 128
-    scene.cycles.adaptive_sampling = True
-    scene.cycles.use_denoising = True
+    select_render_engine()
+
+    if scene.render.engine == 'CYCLES':
+        # Установка типа вычислительного устройства (CUDA или METAL)
+        bpy.context.preferences.addons['cycles'].preferences.compute_device_type = 'METAL'
+
+        # Включение всех доступных устройств GPU
+        for device in bpy.context.preferences.addons['cycles'].preferences.devices:
+            device.use = True
+
+        scene.cycles.device = 'GPU'
+        scene.cycles.samples = int(input("Введите количество сэмплов (по умолчанию 128): ").strip() or 128)
+        scene.cycles.adaptive_sampling = True
+        scene.cycles.use_denoising = True
+    elif scene.render.engine == 'BLENDER_EEVEE':
+        scene.eevee.taa_render_samples = int(input("Введите количество сэмплов для Eevee (по умолчанию 16): ").strip() or 16)
 
     # Установка формата файла и кодека для сохранения
     scene.render.image_settings.file_format = 'FFMPEG'
@@ -67,7 +86,7 @@ def setup_rendering(scene):
 
     # Установка количества потоков CPU для рендеринга
     bpy.context.scene.render.threads_mode = 'AUTO'  # Использовать автоматическое определение потоков
-    bpy.context.scene.render.threads = 6  # Пример: использовать 6 потока
+    bpy.context.scene.render.threads = int(input("Введите количество потоков CPU для рендеринга (по умолчанию 6): ").strip() or 6)
 
 def render_animation(blend_file, output_file, start_frame, end_frame):
     # Функция для рендеринга анимации
