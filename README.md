@@ -14,8 +14,14 @@
 6. В папке для рендеринга проверить готовые .mp4 файлы
 
 
-Запустить скрипт можно, также, и из консоли, в фоновом режиме
+Запустить скрипт можно, также, и из консоли, в фоновом режиме. Это значительно ускоряет рендеринг, освобождает ресурсы на визуализацию и позволяет параллельно работать еще в одном проекте Blender
+
+Mac OS X \ Linux
 ```bash
-/Applications/Blender.app/Contents/MacOS/Blender --background --python /Volumes/Untitled/Gym/Blender/bscripts/renderer.py
+/Applications/Blender.app/Contents/MacOS/Blender --background --python /path/to/renderer.py
 ```
 
+Windows
+```powershell
+"C:\Program Files\Blender Foundation\Blender\blender.exe" --background --python C:\path\to\renderer.py
+```
