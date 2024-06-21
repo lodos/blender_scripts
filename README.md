@@ -1,5 +1,6 @@
 # BlenderScripts
 
+
 ## Настройки в файле renderer.py
 
 1. Указать путь к .blend-модели в строке 50 и папку для хранения отрендеренных .mp4 файлов. Папка называется Render и должны присутствовать права на запись
@@ -35,4 +36,16 @@ Mac OS X \ Linux
 Windows
 ```powershell
 "C:\Program Files\Blender Foundation\Blender\blender.exe" --background --python C:\path\to\renderer.py
+```
+
+
+Для улучшения дружелюбности, можно использовать из консоли скрипт с пошаговым мастером
+Mac OS X \ Linux
+```bash
+/Applications/Blender.app/Contents/MacOS/Blender --background --python /path/to/renderer_steps.py
+```
+
+Windows
+```powershell
+"C:\Program Files\Blender Foundation\Blender\blender.exe" --background --python C:\path\to\renderer_steps.py
 ```
