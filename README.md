@@ -39,7 +39,7 @@ Windows
 ```
 
 
-Для улучшения дружелюбности, можно использовать из консоли скрипт с пошаговым мастером
+### Для улучшения дружелюбности, можно использовать из консоли скрипт с пошаговым мастером
 Mac OS X \ Linux
 ```bash
 /Applications/Blender.app/Contents/MacOS/Blender --background --python /path/to/renderer_steps.py
